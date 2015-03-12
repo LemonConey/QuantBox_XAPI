@@ -39,7 +39,7 @@ namespace ConsoleApplication
             quoteApi.OnRtnDepthMarketData = OnRtnDepthMarketData;
             quoteApi.OnRtnError = OnRtnError;
             quoteApi.Connect();
-            quoteApi.Subscribe("IF1310;IF1311", "");
+            quoteApi.Subscribe("IF1211;IF1210;IF1212", "");
 
             Console.ReadKey();
         }
