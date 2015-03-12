@@ -6,13 +6,18 @@ using System.Threading.Tasks;
 using QuantBox.XAPI.Callback;
 using QuantBox;
 using QuantBox.XAPI;
+using System.Runtime.InteropServices;
 namespace ConsoleApplication
 {
     class Program
     {
         static void OnConnectionStatus(object sender, ConnectionStatus status, ref RspUserLoginField userLogin, int size1)
         {
-            Console.WriteLine("333333" + status + userLogin.ErrorMsg());
+            Console.WriteLine(status + userLogin.ErrorMsg());
+        }
+        static void OnRtnError(object sender, [In] ref ErrorField error)
+        {
+
         }
 
         static void OnRtnDepthMarketData(object sender, ref DepthMarketDataField marketData)
@@ -32,8 +37,9 @@ namespace ConsoleApplication
 
             quoteApi.OnConnectionStatus = OnConnectionStatus;
             quoteApi.OnRtnDepthMarketData = OnRtnDepthMarketData;
+            quoteApi.OnRtnError = OnRtnError;
             quoteApi.Connect();
-            quoteApi.Subscribe("IF1503", "");
+            quoteApi.Subscribe("IF1310;IF1311", "");
 
             Console.ReadKey();
         }
