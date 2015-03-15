@@ -85,12 +85,14 @@ namespace ConsoleApplication
         public static void TestTradeApi()
         {
             tradeApi = new XApi(@"QuantBox_Femas_Trade.dll");
-            tradeApi.Server.Address = "tcp://117.184.207.108:6888"; //"tcp://124.74.248.150:7230";//
+            tradeApi.Server.Address = "tcp://117.184.207.108:6666"; //"tcp://124.74.248.150:7230";//
             tradeApi.User.UserID = "155092"; //"jk8";//
             tradeApi.User.Password = "666666"; //"111111";//
             tradeApi.Server.BrokerID = "0001"; //"0152";//
-            tradeApi.Server.TopicId = 100;
-            tradeApi.Server.MarketDataTopicResumeType = ResumeType.Quick;
+            //tradeApi.Server.TopicId = 100;
+            //tradeApi.Server.MarketDataTopicResumeType = ResumeType.Quick;
+            tradeApi.Server.PrivateTopicResumeType = ResumeType.Restart;
+            tradeApi.Server.PublicTopicResumeType = ResumeType.Restart;
 
             //quoteApi.SubscribedInstruments["S"] = new SortedSet<string>() { "IF1212;IF1211;IF1210" };
             tradeApi.OnConnectionStatus = OnConnectionStatus;
@@ -100,10 +102,10 @@ namespace ConsoleApplication
         static void Main(string[] args)
         {
             Console.WriteLine("计时器频率: " + Stopwatch.Frequency);
-            TestQuoteApi();
+            //TestQuoteApi();
             TestTradeApi();
             Console.ReadKey();
-            quoteApi.Disconnect();
+            //quoteApi.Disconnect();
             tradeApi.Disconnect();
             
         }
